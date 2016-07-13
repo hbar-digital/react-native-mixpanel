@@ -107,4 +107,9 @@ RCT_EXPORT_METHOD(reset) {
     [mixpanel reset];
 }
 
+RCT_EXPORT_METHOD(requestPushPermission) {
+    [[UIApplication sharedApplication] registerUserNotificationSettings:[UIUserNotificationSettings settingsForTypes:(UIUserNotificationTypeSound | UIUserNotificationTypeAlert | UIUserNotificationTypeBadge) categories:nil]];
+    [[UIApplication sharedApplication] registerForRemoteNotifications];
+}
+
 @end
