@@ -107,9 +107,15 @@ RCT_EXPORT_METHOD(reset) {
     [mixpanel reset];
 }
 
+// request permission
 RCT_EXPORT_METHOD(requestPushPermission) {
     [[UIApplication sharedApplication] registerUserNotificationSettings:[UIUserNotificationSettings settingsForTypes:(UIUserNotificationTypeSound | UIUserNotificationTypeAlert | UIUserNotificationTypeBadge) categories:nil]];
     [[UIApplication sharedApplication] registerForRemoteNotifications];
+}
+
+// add token
+RCT_EXPORT_METHOD(token) {
+    [mixpanel.people addPushDeviceToken:token];
 }
 
 @end
