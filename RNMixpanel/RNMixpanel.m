@@ -114,7 +114,7 @@ RCT_EXPORT_METHOD(requestPushPermission) {
 }
 
 // add token
-RCT_EXPORT_METHOD(token) {
+RCT_EXPORT_METHOD(addPushDeviceToken:(NSString *)token) {
     [mixpanel.people addPushDeviceToken:token];
 }
 
