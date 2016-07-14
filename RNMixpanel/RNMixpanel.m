@@ -114,7 +114,21 @@ RCT_EXPORT_METHOD(requestPushPermission) {
 }
 
 // add token
-RCT_EXPORT_METHOD(addPushDeviceToken:(NSString *)token) {
+RCT_EXPORT_METHOD(addPushDeviceToken:(NSString *)tokenString) {
+    
+    char buf[3];
+    buf[2] = '\0';
+    unsigned char *bytes = malloc([tokenString length]/2);
+    unsigned char *bp = bytes;
+    for (CFIndex i = 0; i < [tokenString length]; i += 2) {
+        buf[0] = [tokenString characterAtIndex:i];
+        buf[1] = [tokenString characterAtIndex:i+1];
+        char *b2 = NULL;
+        *bp++ = strtol(buf, &b2, 16);
+    }
+    
+    NSData *token = [NSData dataWithBytesNoCopy:bytes length:[tokenString length]/2 freeWhenDone:YES];
+    
     [mixpanel.people addPushDeviceToken:token];
 }
 
